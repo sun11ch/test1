@@ -6,7 +6,7 @@ set(PROJECT_NAME test1) 			 # задать значение PROJECT_NAME
 project("${PROJECT_NAME}")           # установить имя проекта
 
 
-set(CMAKE_CXX_STANDARD 20)			 # устанавливаем 17 стандарт языка
+set(CMAKE_CXX_STANDARD 17)			 # устанавливаем 17 стандарт языка
 
 # Сказать программе, что должен быть исполняемый файл
 add_executable("${PROJECT_NAME}" main.cpp)
