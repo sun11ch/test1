@@ -3,6 +3,7 @@ using namespace std;
 
 
 int main() {
+	setlocale(LC_ALL, "RUS");
 	unsigned short a; // минимальный неотрицательный целочисленный тип данных
 	unsigned short b; // минимальный неотрицательный целочисленный тип данных
 	cout << "Number a (0-65535):";
