@@ -3,7 +3,6 @@ using namespace std;
 
 
 int main() {
-	setlocale(LC_ALL, "RUS");
 	unsigned short a; // минимальный неотрицательный целочисленный тип данных
 	unsigned short b; // минимальный неотрицательный целочисленный тип данных
 	cout << "Number a (0-65535):";
@@ -21,6 +20,6 @@ int main() {
 	
 	cout << "|UNSIGNED SHORT| " << "|size: 16 bits| " << "|max: " << USHRT_MAX << "| " << "|min: 0|" << endl;
 	cout << "|UNSIGNED INT| " << "|size: 32 bits| " << "|max: " << UINT_MAX << "| " << "|min: 0|" << endl;
-	cout << "|INT| " << "|size: 32 bit| " << "|max: " << INT_MAX << "| " << "|min: " << INT_MIN<< "|" << endl;
+	cout << "|INT| " << "|size: 32 bits| " << "|max: " << INT_MAX << "| " << "|min: " << INT_MIN<< "|" << endl;
 	return 0;
 }
