@@ -1,5 +1,4 @@
-﻿
-#include <iostream>
+﻿#include <iostream>
 #include <bitset>
 using namespace std;
 
@@ -8,20 +7,26 @@ int main() {
 	setlocale(LC_ALL, "RU");
 
 	short A;
-	unsigned short i;
-	cout << "Число A (от -32768 до 32767): ";
-	cin >> A;
-	
-	bitset<8> a8(A);
+	unsigned short nomerbitaI;
+	bool znacheniebitaI;
+
+	cout << "Число A (от -32768 до 32767): "; cin >> A;
+
+	bitset<8> a8 = A;
 
 	cout << A << " в двоичной системе (первые 8 бит): "<< a8 << endl;
+	cout << "Бит (от 0 до 7): "; cin >> nomerbitaI;
 
-	cout << "Бит (от 0 до 7): ";
-	cin >> i;
+	znacheniebitaI = (A >> nomerbitaI) & 1;
 
-	cout << "Бит номер " << i << ": " << a8[i] << endl;
+	if ((nomerbitaI >7) || (nomerbitaI <0 )){
+		cout << "Ошибка";
+		return 1;
+	}
 
-	if (a8[i] != 0)
+	cout << "Значение бита под номером " << nomerbitaI << ": " << znacheniebitaI << endl;
+
+	if (znacheniebitaI != 0)
 	{
 		int ch1;
 		int ch2;
@@ -43,9 +48,10 @@ int main() {
 		}
 
 	}
+
 	else {
-		a8[i - 1] = ~a8[i - 1];
-		a8[i + 1] = ~a8[i + 1];
+		A = A ^ (1 << (nomerbitaI - 1) );
+		a8 = A ^ (1 << (nomerbitaI + 1) );
 		cout << "Обртаное двоичное число: " << a8 << endl;
 		cout << "Обртаное десятичное число: " << a8.to_ullong() << endl;
 	}
@@ -86,9 +92,6 @@ int main() {
 		default:
 			cout << "Ошибка не найдена" << endl;
 			break;
-
 	}
-
-
 	return 0;
 }
