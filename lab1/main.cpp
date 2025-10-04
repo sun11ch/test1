@@ -29,11 +29,11 @@ int main() {
 	cout << "b/a = " << delenie_ba << endl;
 	
 	/// название типа данных, размер в битах, максимальное и минимальное значение посчитанное формулой (можно в экс. формате)
-	cout << "|UNSIGNED SHORT| " << "|size: " << sizeof(short) * 8 << " bits| " << "|max: " << pow(2, sizeof(short) * 8) -1 << "| "<< "|min: " << numeric_limits<unsigned short>::min()<< "|" << endl;
+	cout << "|UNSIGNED SHORT| " << "|size: " << sizeof(short) * 8 << " bits| " << "|max: " << pow(2, sizeof(short) * 8) -1 << "| "<< "|min: " << numeric_limits<unsigned short>::lowest()<< "|" << endl;
 
 	cout << "|UNSIGNED INT| " << "|size: " << sizeof(int) * 8 << " bits| " << "|max: " << pow(2, sizeof(int)*8) -1<< "| " << "|min: "<< numeric_limits<unsigned int>::min()<< "|" << endl;
 
-	cout << "|INT| " << "|size: " << sizeof(int)*8 << " bits| " << "|max: " << pow(2, sizeof(int) * 8 - 1)<< "| " << "|min: " << -pow(2, sizeof(int) * 8 - 1) << "|" << endl;
+	cout << "|INT| " << "|size: " << sizeof(int)*8 << " bits| " << "|max: " << pow(2, sizeof(int) * 8 - 1) - 1<< "| " << "|min: " << -pow(2, sizeof(int) * 8 -1 ) << "|" << endl;
 
-	cout << "|FLOAT| " << "|size: " << sizeof(float) * 8 << " bits|" << "|max: " << FLT_MAX << "| " << "|min: " << FLT_MIN << "|" << endl;
+	cout << "|FLOAT| " << "|size: " << sizeof(float) * 8 << " bits|" << "|max: " << FLT_MAX << "| " << "|min: " << numeric_limits<float>::lowest() << "|" << endl;
 }
