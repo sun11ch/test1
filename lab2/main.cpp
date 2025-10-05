@@ -50,8 +50,7 @@ int main() {
 	}
 
 	else {
-		A = A ^ (1 << (nomerbitaI - 1) );
-		a8 = A ^ (1 << (nomerbitaI + 1) );
+		a8 ^= (1 << nomerbitaI+1) | (1 << nomerbitaI - 1);
 		cout << "Обртаное двоичное число: " << a8 << endl;
 		cout << "Обртаное десятичное число: " << a8.to_ullong() << endl;
 	}
