@@ -3,19 +3,19 @@ using namespace std;
 
 int main() {
 	setlocale(LC_ALL, "Ru");
-	short kc;
-	float c;
-	float sumc{0};
-	unsigned short nomer{0};
-	float maxc{-0.36};
-	bool foundc{0};
-	cout << "Сколько вещественных чисел в последовательности: "; cin >> kc;
-	if (kc > 0 && kc <= 32767) {
-		for (unsigned short i = 1; i != kc + 1; i += 1) {
+
+	float c, sumc{ 0 }, maxc{ -0.36 }, vgr{ 10.1 }, ngr{ -0.36 };
+	unsigned short kc, nomer{0};
+	bool foundc = false;
+
+	cout << "Сколько вещественных чисел в последовательности (от 1 до 65535): "; cin >> kc;
+
+	if (0 < kc <= 65535) {
+		for (unsigned short i = 1; i <= kc; i += 1) {
 			cout << "Число " << i << ": "; cin >> c;
-			if (c > -0.36 && c <= 10.1) {
-				foundc = 1;
-				sumc = sumc + c;
+			if (c > ngr && c<= vgr) {
+				sumc = c+sumc;
+				foundc = true;
 				if (c > maxc) {
 					maxc = c;
 					nomer = i;
@@ -27,22 +27,27 @@ int main() {
 		cout << "Ошибка";
 		return 1;
 	}
-	if (foundc = 0) {
-		cout << "нет чисел условия" << endl;
+	if (foundc == false){
+		cout << "Нет чисел из интервала (-0,36; 10,1]:" << endl;
 	}
 	else {
-		cout << "summa: " << sumc << endl;
-		cout << "nomer max chisla: " << nomer << endl;
-		cout << "max chisla: " << maxc << endl;
+		cout << "Сумма чисел из интервала (-0,36; 10,1]: " << sumc << endl;
+		cout << "Номер максимального числа из интервала (-0,36; 10,1]:: " << nomer << endl;
+		cout << "Максимальное число из интервала (-0,36; 10,1]: " << maxc << endl;
 	}
 
 	short c2;
 	short mc2;
 	short pr{1};
+	cout << "---------------------------------------" << endl;
 	cout << "Введите целое число |X|<1000: "; cin >> c2;
 	mc2 = abs(c2);
 	if (c2 == 0) {
 		cout << "Произведение цифр числа " << c2 << ": 0" << endl;
+		return 1;
+	}
+	if (c2 > 1000 || c2 < -1000) {
+		cout << "Ошибка, вы вышли из диапазона числа X" << endl;
 		return 1;
 	}
 	while (mc2 > 0) {
