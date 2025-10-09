@@ -4,13 +4,13 @@ using namespace std;
 int main() {
 	setlocale(LC_ALL, "Ru");
 
-	float c, sumc{ 0 }, maxc{ -0.36 }, vgr{ 10.1 }, ngr{ -0.36 };
-	unsigned short kc, nomer{0};
+	float c, sumc = 0, maxc = -0.36, vgr = 10.1, ngr = -0.36;
+	short kc, nomer = 0;
 	bool foundc = false;
 
-	cout << "Сколько вещественных чисел в последовательности (от 1 до 65535): "; cin >> kc;
+	cout << "Сколько вещественных чисел в последовательности (от 1 до 32766): "; cin >> kc;
 
-	if (0 < kc <= 65535) {
+	if ((kc > 0) && (kc<32767)) {//
 		for (unsigned short i = 1; i <= kc; i += 1) {
 			cout << "Число " << i << ": "; cin >> c;
 			if (c > ngr && c<= vgr) {
@@ -24,7 +24,7 @@ int main() {
 		}
 	}
 	else {
-		cout << "Ошибка";
+		cout << "Ошибка, количество чисел должно быть от 1 до 32766";
 		return 1;
 	}
 	if (foundc == false){
@@ -38,17 +38,17 @@ int main() {
 
 	short c2;
 	short mc2;
-	short pr{1};
+	short pr = 1;
 	cout << "---------------------------------------" << endl;
 	cout << "Введите целое число |X|<1000: "; cin >> c2;
 	mc2 = abs(c2);
 	if (c2 == 0) {
 		cout << "Произведение цифр числа " << c2 << ": 0" << endl;
-		return 1;
+		return 2;
 	}
 	if (c2 > 1000 || c2 < -1000) {
 		cout << "Ошибка, вы вышли из диапазона числа X" << endl;
-		return 1;
+		return 3;
 	}
 	while (mc2 > 0) {
 		pr = pr * (mc2 % 10);
