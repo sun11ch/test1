@@ -1,4 +1,4 @@
-// пункт 2
+п»ї// РїСѓРЅРєС‚ 2
 #include <iostream>
 void pynkt2() {
 	setlocale(LC_ALL, "Rus");
@@ -6,7 +6,7 @@ void pynkt2() {
 	const int stlb = 4;
 	int matr[strk][stlb];
 	for (int i = 0; i < strk; i += 1) {
-		std::cout << "Введите 4 элемента " << i+1 << " строки: ";
+		std::cout << "Р’РІРµРґРёС‚Рµ 4 СЌР»РµРјРµРЅС‚Р° " << i+1 << " СЃС‚СЂРѕРєРё: ";
 		for (int j = 0; j < stlb; j += 1) {
 			std::cin >> matr[i][j];
 		}
@@ -18,17 +18,17 @@ void pynkt2() {
 		for (int j = 0; j < stlb; j += 1) {
 			tempsum += abs(matr[i][j]);
 		}
-		std::cout << "Сумма модулей элементов " << i+1 << " строки: " << tempsum << std::endl;
+		std::cout << "РЎСѓРјРјР° РјРѕРґСѓР»РµР№ СЌР»РµРјРµРЅС‚РѕРІ " << i+1 << " СЃС‚СЂРѕРєРё: " << tempsum << std::endl;
 		if (tempsum > maxstrk) {
 			maxstrk = tempsum;
 			nmaxstrk = i;
 		}
 	}
-	std::cout << "Строка " << nmaxstrk+1 << " имеет максимальную сумму модулей её элементов: " << maxstrk << std::endl;
+	std::cout << "РЎС‚СЂРѕРєР° " << nmaxstrk+1 << " РёРјРµРµС‚ РјР°РєСЃРёРјР°Р»СЊРЅСѓСЋ СЃСѓРјРјСѓ РјРѕРґСѓР»РµР№ РµС‘ СЌР»РµРјРµРЅС‚РѕРІ: " << maxstrk << std::endl;
 	for (int j = 0; j < stlb; j += 1) {
 		matr[nmaxstrk][j] = 0;
 	}
-	std::cout << "Матрица после обнуления строки " << nmaxstrk + 1 << ": " << std::endl;
+	std::cout << "РњР°С‚СЂРёС†Р° РїРѕСЃР»Рµ РѕР±РЅСѓР»РµРЅРёСЏ СЃС‚СЂРѕРєРё " << nmaxstrk + 1 << ": " << std::endl;
 	for (int i = 0; i < strk; i += 1) { 
 		for (int j = 0; j < stlb; j += 1) {
 			std::cout << matr[i][j] << " ";
