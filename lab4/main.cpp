@@ -1,6 +1,6 @@
 ﻿// пункт 1
 #include <iostream>
-#include <C:\Git\test1\lab4\main2.cpp>
+#include "main2.cpp"
 int main() {
 	//pynkt2();
 	setlocale(LC_ALL, "Rus");
@@ -29,7 +29,7 @@ int main() {
 				}
 			}
 		}
-		std::cout << "В массиве есть 2 одинаковых числа подряд. Отсортированный массив: ";
+		std::cout << "В массиве есть 2 одинаковых числа подряд. Отсортированный по возростанию массив: ";
 		std::cout << "[";
 		for (int i = 0; i < n; i += 1) {
 			std::cout << mas[i] << " ";
