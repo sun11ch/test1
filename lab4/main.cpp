@@ -1,9 +1,31 @@
 ﻿// пункт 1
 #include <iostream>
 #include "main2.cpp"
+
+
 int main() {
-	//pynkt2();
 	setlocale(LC_ALL, "Rus");
+	std::cout << "Пунт кода (1/2):";
+	int A;
+	std::cin >> A;
+	switch (A) {
+		case 1:
+			break;
+		case 2:
+			pynkt2();
+			return 2;
+			break;
+		default:
+			return 0;
+	}
+	/*
+	if (A == 1) {
+	}
+	else{
+		pynkt2();
+		return 2;
+	}
+	*/
 	std::cout << "---Введите 6 чисел массива---" << std::endl;
 	const int n = 6;
 	int mas[n];
@@ -46,5 +68,5 @@ int main() {
 	}
 
 
-	return 0;
+	return 1;
 }

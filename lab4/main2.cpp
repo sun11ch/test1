@@ -1,4 +1,4 @@
-﻿// пункт 2
+﻿// пyнкт 2
 #include <iostream>
 void pynkt2() {
 	setlocale(LC_ALL, "Rus");
