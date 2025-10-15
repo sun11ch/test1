@@ -18,14 +18,6 @@ int main() {
 		default:
 			return 0;
 	}
-	/*
-	if (A == 1) {
-	}
-	else{
-		pynkt2();
-		return 2;
-	}
-	*/
 	std::cout << "---Введите 6 чисел массива---" << std::endl;
 	const int n = 6;
 	int mas[n];
