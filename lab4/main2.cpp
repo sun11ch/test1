@@ -11,8 +11,9 @@ void pynkt2() {
 			std::cin >> matr[i][j];
 		}
 	}
-	int maxstrk = 0;
-	int nmaxstrk = 0;
+	///было 0 стало -1
+	int maxstrk = -1;
+	int nmaxstrk = -1;
 	for (int i = 0; i < strk; i += 1) {
 		int tempsum = 0;
 		for (int j = 0; j < stlb; j += 1) {
