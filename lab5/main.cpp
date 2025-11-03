@@ -1,45 +1,41 @@
-﻿/*В начале каждой функции выводить текст с информацией какая именно функция используется например "исп. функция суммы 2х чисел", 
-числа вводятся целые, для выбора какая функция должна вызываться в п. 1 использовать правило "если число = 0, считаем что его нет" т.е. ввод (1;0;2) 
-считать как два числа, (1;5;3) как три числа, а (0;0;7) как одно число. 
-Функции в п. 1 должны вернуть численное значение.
-Реализовать возможность для пользователя ввести номер  пункта который будет выполняться (1 или 2).
-Задание п.2 написано после всех вариантов и является обобщенным упрощение, все желающие могут сделать дополнительное задание.
-Разбиение на файлы не обязательно.
-
-Пункт 1 – перегрузка функций. (Лекция 24.10)
-Вариант 3
-Для двух чисел – если одно кратно другому то результат деления, иначе произведение чисел.
-Для трёх чисел – если они одинаковые то вернуть значение 1, иначе -1.
-
-Пункт 2 – void функция.
-
-Переделать л1 в void функцию. Числа ввести в основной программе, и передать в функцию, которая выводит результат на экран. 
-Для 2-х неотрицательных целых чисел вычислить попарные суммы/разности/произведения/частные.
-
-*/
-#include <iostream>
-int DvaChisla(short ch1, short ch2) {
+﻿#include <iostream>
+void Laba1(int a, int b) {
+	std::cout << "Используется функция вычисления попарной суммы/разности/произведения/частного";
+	int sum_ab = a + b; 
+	int razn_ab = a - b; 
+	int razn_ba = b - a;
+	int proizv_ab = a * b; 
+	float delenie_ab = static_cast<float>(a) / b; 
+	float delenie_ba = static_cast<float>(b) / a; 
+	std::cout << "a+b = b+a: " << sum_ab << std::endl;
+	std::cout << "a-b: " << razn_ab << std::endl;
+	std::cout << "b-a: " << razn_ba << std::endl;
+	std::cout << "a*b = b*a: " << proizv_ab << std::endl;
+	std::cout << "a/b = " << delenie_ab << std::endl;
+	std::cout << "b/a = " << delenie_ba << std::endl;
+}
+int Chisla(int a, int b) {
 	std::cout << "Используется функция кратности двух чисел" << std::endl;
-	if ((ch1 == ch2) && ch1 != 0 && ch2 != 0) {
-		std::cout << "Числа кратны друг другу. Результат их деления: " << ch1 / ch2;
-		return ch1 / ch2;
+	if (a == b) {
+		std::cout << "Числа кратны друг другу. Результат их деления: " << a / b;
+		return a / b;
 	}
-	if ((ch2 != 0) and (ch1 % ch2 == 0)) {
-		std::cout << "Число " << ch1 << " кратно числу " << ch2 << ". Результат деления " << ch1 << " на " << ch2 << ": " << ch1 / ch2 << std::endl;
-		return ch1 / ch2;
+	if (a % b == 0) {
+		std::cout << "Число " << a << " кратно числу " << b << ". Результат деления " << a << " на " << b << ": " << a / b << std::endl;
+		return a / b;
 	}
-	else if ((ch1 != 0) and (ch2 % ch1 == 0)) {
-		std::cout << "Число " << ch2 << " кратно числу " << ch1 << ". Результат деления " << ch2 << " на " << ch1 << ": " << ch2 / ch1 << std::endl;
-		return ch2 / ch1;
+	else if (b % a == 0) {
+		std::cout << "Число " << b << " кратно числу " << a << ". Результат деления " << b << " на " << a << ": " << b / a << std::endl;
+		return b / a;
 	}
 	else {
-		std::cout << "Число " << ch1 << " не кратно числу " << ch2 << " и число " << ch2 << " не кратно числу " << ch1 << ". Результат их произведения: " << ch1 * ch2 << std::endl;
-		return ch1 * ch2;
+		std::cout << "Число " << a << " не кратно числу " << b << " и число " << b << " не кратно числу " << a << ". Результат их произведения: " << a * b << std::endl;
+		return a * b;
 	}
 }
-short TriChisla(short ch1, short ch2, short ch3) {
+int Chisla(int a, int b, int c) {
 	std::cout << "Используется функция определения равности трех чисел" << std::endl;
-	if ((ch1 == ch2) and (ch2 == ch3)) {
+	if ((a == b) and (b == c)) {
 		std::cout << "Три числа равны друг другу";
 		return 1;
 	}
@@ -48,34 +44,44 @@ short TriChisla(short ch1, short ch2, short ch3) {
 		return -1;
 	}
 }
-int main() {
-	setlocale(LC_ALL, "Rus");
-	std::cout << "Введите три числа" << std::endl;
-	int temp1, temp2, temp3;
-	std::cout << "Число 1 (от -32768 до 32767): "; std::cin >> temp1;
-	std::cout << "Число 2 (от -32768 до 32767): "; std::cin >> temp2;
-	std::cout << "Число 3 (от -32768 до 32767): "; std::cin >> temp3;
-	short ch1, ch2, ch3;
-	ch1 = temp1; ch2 = temp2; ch3=temp3;
-	if ( (temp1> 32767) or (temp1 < -32767) or (temp3 > 32767) or (temp3 < -32767) or (temp3 > 32767) or (temp3 < -32767)) {
-		std::cout << "Ошибка, числа должны быть от -32768 до 32767";
-		return 0;
-	}
-
-	if ((ch1 != 0) and (ch2 != 0) and (ch3 != 0)) {
-		TriChisla(ch1, ch2, ch3);
-	}
-	else if ((ch1 == 0) and (ch2 != 0) and (ch3 != 0)) {
-		DvaChisla(ch2, ch3);
-	}
-	else if ((ch1 != 0) and (ch2 == 0) and (ch3 != 0)) {
-		DvaChisla(ch1, ch3);
-	}
-	else if ((ch1 != 0) and (ch2 != 0) and (ch3 == 0)) {
-		DvaChisla(ch1, ch2);
+void VyborPynkta(int a, int b) {
+	if ((a >= 1) and (b >= 1)) {
+		int p;
+		std::cout << "Какой пункт следуюет выполнить (1 или 2): "; std::cin >> p;
+		if (p == 1) {
+			Laba1(a, b);
+		}
+		else if (p == 2) {
+			Chisla(a, b);
+		}
 	}
 	else {
-		std::cout << "error";
+		Chisla(a, b);
 	}
-	return 30;
+}
+int main() {
+	setlocale(LC_ALL, "Rus");
+	std::cout << "Введите три целых числа" << std::endl;
+	int ch1, ch2, ch3;
+	std::cout << "Число 1: "; std::cin >> ch1;
+	std::cout << "Число 2: "; std::cin >> ch2;
+	std::cout << "Число 3: "; std::cin >> ch3;
+
+	if ((ch1 != 0) and (ch2 != 0) and (ch3 != 0)) {
+		Chisla(ch1, ch2, ch3);
+	}
+	else if ((ch1 != 0) and (ch2 != 0) and (ch3 == 0)) {
+		VyborPynkta(ch1, ch2);
+	}
+	else if ((ch1 != 0) and (ch2 == 0) and (ch3 != 0)) {
+		VyborPynkta(ch1, ch3);
+	}
+	else if ((ch1 == 0) and (ch2 != 0) and (ch3 != 0)) {
+		VyborPynkta(ch3, ch2);
+	}
+	else {
+		std::cout << "Error";
+		return 30;
+	}
+	return 0;
 }
