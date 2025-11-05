@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 void Laba1(int a, int b) {
-	std::cout << "Используется функция вычисления попарной суммы/разности/произведения/частного";
+	std::cout << "Используется функция вычисления попарной суммы/разности/произведения/частного для неотрицательных чисел";
 	int sum_ab = a + b; 
 	int razn_ab = a - b; 
 	int razn_ba = b - a;
@@ -18,19 +18,19 @@ int Chisla(int a, int b) {
 	std::cout << "Используется функция кратности двух чисел" << std::endl;
 	if (a == b) {
 		std::cout << "Числа кратны друг другу. Результат их деления: " << a / b;
-		return a / b;
+		return (a / b);
 	}
 	if (a % b == 0) {
 		std::cout << "Число " << a << " кратно числу " << b << ". Результат деления " << a << " на " << b << ": " << a / b << std::endl;
-		return a / b;
+		return (a / b);
 	}
 	else if (b % a == 0) {
 		std::cout << "Число " << b << " кратно числу " << a << ". Результат деления " << b << " на " << a << ": " << b / a << std::endl;
-		return b / a;
+		return (b / a);
 	}
 	else {
 		std::cout << "Число " << a << " не кратно числу " << b << " и число " << b << " не кратно числу " << a << ". Результат их произведения: " << a * b << std::endl;
-		return a * b;
+		return (a * b);
 	}
 }
 int Chisla(int a, int b, int c) {
@@ -49,10 +49,10 @@ void VyborPynkta(int a, int b) {
 		int p;
 		std::cout << "Какой пункт следуюет выполнить (1 или 2): "; std::cin >> p;
 		if (p == 1) {
-			Laba1(a, b);
+			Chisla(a, b);
 		}
 		else if (p == 2) {
-			Chisla(a, b);
+			Laba1(a, b);
 		}
 	}
 	else {
