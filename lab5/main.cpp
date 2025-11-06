@@ -48,8 +48,31 @@ int main() {
 	setlocale(LC_ALL, "Rus");
 	int py;
 	std::cout << "Какой пункт выполнить: "; std::cin >> py;
+	int answer;
 	if (py == 1) {
+		std::cout << "Введите три целых числа" << std::endl;
+		int ch1, ch2, ch3;
+		std::cout << "Число 1: "; std::cin >> ch1;
+		std::cout << "Число 2: "; std::cin >> ch2;
+		std::cout << "Число 3: "; std::cin >> ch3;
 
+		if ((ch1 != 0) and (ch2 != 0) and (ch3 != 0)) {
+			 answer = Chisla(ch1, ch2, ch3);
+		}
+		else if ((ch1 != 0) and (ch2 != 0) and (ch3 == 0)) {
+			 answer = Chisla(ch1, ch2);
+		}
+		else if ((ch1 != 0) and (ch2 == 0) and (ch3 != 0)) {
+			 answer = Chisla(ch1, ch3);
+		}
+		else if ((ch1 == 0) and (ch2 != 0) and (ch3 != 0)) {
+			 answer = Chisla(ch3, ch2);
+		}
+		else {
+			std::cout << "Error";
+			return 30;
+		}
+		std::cout << "Ответ: " << answer;
 	}
 	else if (py == 2) {
 		std::cout << "Введите два неотрицательных целых числа" << std::endl;
@@ -63,39 +86,11 @@ int main() {
 		}
 		else {
 			Laba1(a, b);
-			return 1;
 		}
 	}
 	else {
 		std::cout << "error";
 		return 31;
-	}
-
-	std::cout << "Введите три целых числа" << std::endl;
-	int ch1, ch2, ch3;
-	std::cout << "Число 1: "; std::cin >> ch1;
-	std::cout << "Число 2: "; std::cin >> ch2;
-	std::cout << "Число 3: "; std::cin >> ch3;
-
-	if ((ch1 != 0) and (ch2 != 0) and (ch3 != 0)) {
-		Chisla(ch1, ch2, ch3);
-		return Chisla(ch1, ch2, ch3);
-	}
-	else if ((ch1 != 0) and (ch2 != 0) and (ch3 == 0)) {
-		Chisla(ch1, ch2);
-		return Chisla(ch1, ch2);
-	}
-	else if ((ch1 != 0) and (ch2 == 0) and (ch3 != 0)) {
-		Chisla(ch1, ch3);
-		return Chisla(ch1, ch3);
-	}
-	else if ((ch1 == 0) and (ch2 != 0) and (ch3 != 0)) {
-		Chisla(ch3, ch2);
-		return Chisla(ch3, ch2);
-	}
-	else {
-		std::cout << "Error";
-		return 30;
 	}
 	return 0;
 }
