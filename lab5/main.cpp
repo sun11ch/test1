@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 void Laba1(int a, int b) {
-	std::cout << "Используется функция вычисления попарной суммы/разности/произведения/частного для неотрицательных чисел";
+	std::cout << "Используется функция вычисления попарной суммы/разности/произведения/частного для неотрицательных целых чисел" << std::endl;
 	int sum_ab = a + b; 
 	int razn_ab = a - b; 
 	int razn_ba = b - a;
@@ -44,44 +44,53 @@ int Chisla(int a, int b, int c) {
 		return -1;
 	}
 }
-void VyborPynkta(int a, int b) {
-	if ((a >= 1) and (b >= 1)) {
-		int p;
-		std::cout << "Какой пункт следуюет выполнить (1 или 2): "; std::cin >> p;
-		if (p == 1) {
-			Chisla(a, b);
+int main() {
+	setlocale(LC_ALL, "Rus");
+	int py;
+	std::cout << "Какой пункт выполнить: "; std::cin >> py;
+	int answer;
+	if (py == 1) {
+		std::cout << "Введите три целых числа" << std::endl;
+		int ch1, ch2, ch3;
+		std::cout << "Число 1: "; std::cin >> ch1;
+		std::cout << "Число 2: "; std::cin >> ch2;
+		std::cout << "Число 3: "; std::cin >> ch3;
+
+		if ((ch1 != 0) and (ch2 != 0) and (ch3 != 0)) {
+			 answer = Chisla(ch1, ch2, ch3);
 		}
-		else if (p == 2) {
+		else if ((ch1 != 0) and (ch2 != 0) and (ch3 == 0)) {
+			 answer = Chisla(ch1, ch2);
+		}
+		else if ((ch1 != 0) and (ch2 == 0) and (ch3 != 0)) {
+			 answer = Chisla(ch1, ch3);
+		}
+		else if ((ch1 == 0) and (ch2 != 0) and (ch3 != 0)) {
+			 answer = Chisla(ch3, ch2);
+		}
+		else {
+			std::cout << "Error";
+			return 30;
+		}
+		std::cout << "Ответ: " << answer;
+	}
+	else if (py == 2) {
+		std::cout << "Введите два неотрицательных целых числа" << std::endl;
+		int a;
+		int b;
+		std::cout << "Число 1: "; std::cin >> a;
+		std::cout << "Число 2: "; std::cin >> b;
+		if ((a < 0) or (b < 0)) {
+			std::cout << "error";
+			return 32;
+		}
+		else {
 			Laba1(a, b);
 		}
 	}
 	else {
-		Chisla(a, b);
-	}
-}
-int main() {
-	setlocale(LC_ALL, "Rus");
-	std::cout << "Введите три целых числа" << std::endl;
-	int ch1, ch2, ch3;
-	std::cout << "Число 1: "; std::cin >> ch1;
-	std::cout << "Число 2: "; std::cin >> ch2;
-	std::cout << "Число 3: "; std::cin >> ch3;
-
-	if ((ch1 != 0) and (ch2 != 0) and (ch3 != 0)) {
-		Chisla(ch1, ch2, ch3);
-	}
-	else if ((ch1 != 0) and (ch2 != 0) and (ch3 == 0)) {
-		VyborPynkta(ch1, ch2);
-	}
-	else if ((ch1 != 0) and (ch2 == 0) and (ch3 != 0)) {
-		VyborPynkta(ch1, ch3);
-	}
-	else if ((ch1 == 0) and (ch2 != 0) and (ch3 != 0)) {
-		VyborPynkta(ch3, ch2);
-	}
-	else {
-		std::cout << "Error";
-		return 30;
+		std::cout << "error";
+		return 31;
 	}
 	return 0;
 }
