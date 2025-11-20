@@ -148,8 +148,6 @@ void runPart2() {
     std::cout << "После сортировки по ссылке: ";
     printArray(arr);
 
-    std::mt19937 rng(static_cast<unsigned>(time(nullptr)));
-    std::shuffle(arr.begin(), arr.end(), rng);
     std::cout << "После перемешивания: ";
     printArray(arr);
 
