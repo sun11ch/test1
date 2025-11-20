@@ -10,7 +10,7 @@ void printmatr(int** matrix, int strki, int stlbi) {
 }
 int* FindZeroColumns(int** matrix, int strki, int stlbi, int& count){
 	count = 0;
-	int* zeroCols = (int*)malloc(stlbi * sizeof(int));
+	int* zeroCols = (int*)calloc(stlbi, sizeof(int));
 	if (!zeroCols) return 0;
 	for (int j = 0; j < stlbi; j+=1) {
 		for (int i = 0; i < strki; i+=1) {
@@ -21,7 +21,9 @@ int* FindZeroColumns(int** matrix, int strki, int stlbi, int& count){
 			}
 		}
 	}
-	if (count != 0) {
+
+	if (count > 0) {
+		zeroCols = (int*)realloc(zeroCols, count * sizeof(int));
 		std::cout << "Столбцы для удаления: [ ";
 		for (int i = 0; i < count; i++) std::cout << zeroCols[i] << " ";
 		std::cout << "]" << std::endl;
@@ -117,12 +119,15 @@ int main() {
 	int strki = 2 + a;
 	int stlbi = 2 + b;
 
-	int** temp = (int**)realloc(matrix, strki * sizeof(int*));
-	if (!temp) return 3;
-	matrix = temp;
-
+	matrix = (int**)realloc(matrix, strki * sizeof(int*));
+	
 	for (int i = 2; i < strki; i += 1) {
-		matrix[i] = (int*)malloc(stlbi * sizeof(int));
+		if (i < 2) {
+			matrix[i] = (int*)realloc(matrix[i], stlbi * sizeof(int*));
+		}
+		else{
+			matrix[i] = (int*)malloc(stlbi * sizeof(int));
+		}
 		if (!matrix[i]) {
 			for (int j = 0; j < i; j+=1) 
 				free(matrix[j]);
@@ -131,16 +136,7 @@ int main() {
 		}
 	}
 
-	for (int i = 0; i < 2; i+=1) {
-		int* temp_row = (int*)realloc(matrix[i], stlbi * sizeof(int));
-		if (!temp_row) {
-			for (int j = 0; j < strki; j+=1) 
-				free(matrix[j]);
-			free(matrix);
-			return 6;
-		}
-		matrix[i] = temp_row;
-	}
+
 
 	for (int i = 0; i < strki; i+=1) {
 		for (int j = 0; j < stlbi; j+=1) {

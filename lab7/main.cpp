@@ -8,7 +8,7 @@
 
 void printVector(const std::vector<int>& v) {
     std::cout << "[ ";
-    for (int i = 0; i < v.size(); i+=1) {
+    for (int i = 0; i < v.size(); i += 1) {
         int x = v[i];
         std::cout << x << " ";
     }
@@ -33,34 +33,40 @@ void SearchElements(std::vector<int>& v, int value) {
 void variant3(std::vector<int>& v) {
     std::cout << "До: ";
     printVector(v);
+
     if (v.empty()) {
-        std::cout << "Массив пустой.";
+        std::cout << "Массив пустой." << std::endl;
         return;
     }
+
     int mx = *std::max_element(v.begin(), v.end());
-    int count = 0;
-    for (int x : v) if (x == mx) count++;
-    v.erase(std::remove(v.begin(), v.end(), mx), v.end());
-    if (count == 1)
+    int count = std::count(v.begin(), v.end(), mx);
+    if (count == 1) {
         v.insert(v.begin(), mx);
-    else
-        v.push_back(mx);
+    }
+    else {
+  
+        v.erase(std::remove(v.begin(), v.end(), mx), v.end());
+        int temp = mx;
+        v.push_back(temp);
+    }
+
     std::cout << "После: ";
     printVector(v);
 }
 
-void sortByValue(std::array<int, 10> arr) {       
+void sortByValue(std::array<int, 10> arr) {
     std::sort(arr.begin(), arr.end());
     std::cout << "sortByValue (копия): ";
     for (int x : arr) std::cout << x << " ";
     std::cout << " ";
 }
 
-void sortByReference(std::array<int, 10>& arr) {    
+void sortByReference(std::array<int, 10>& arr) {
     std::sort(arr.begin(), arr.end());
 }
 
-void sortByPointer(std::array<int, 10>* arr) {  // УКАЗАТЕЛЬ
+void sortByPointer(std::array<int, 10>* arr) { 
     std::sort(arr->begin(), arr->end());
 }
 
@@ -101,14 +107,14 @@ void runPart1() {
             printVector(v);
         }
         else if (choice == 2) {
-            int x; 
-            std::cout << "Введите число: "; 
+            int x;
+            std::cout << "Введите число: ";
             std::cin >> x;
             v.insert(v.begin(), x);
         }
         else if (choice == 3) {
-            int x; 
-            std::cout << "Введите число: "; 
+            int x;
+            std::cout << "Введите число: ";
             std::cin >> x;
             v.push_back(x);
         }
@@ -166,7 +172,7 @@ int main() {
         std::cout << "2. Пункт 2 (std::array + сортировки)" << std::endl;
         std::cout << "3. Пункт 3 (объяснительная)" << std::endl;
         std::cout << "0. Выход" << std::endl;
-        std::cout << "Выберите пункт: "; 
+        std::cout << "Выберите пункт: ";
         std::cin >> mainChoice;
         if (mainChoice == 1) {
             runPart1();
