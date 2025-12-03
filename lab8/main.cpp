@@ -73,16 +73,18 @@ void print_way_from_a_to_b(Stop* head) {
     std::string start_name;
     std::cout << "Введите название начальной остановки: ";
     std::cin >> start_name;
-
-    std::string finish_name;
-    std::cout << "Введите название конечной остановки: ";
-    std::cin >> finish_name;
     Stop* start = find_stop_by_name(head, start_name);
-    Stop* finish = find_stop_by_name(head, finish_name);
     if (start == nullptr) {
         std::cout << "Остановка \"" << start_name << "\" не найдена.\n";
         return;
     }
+    
+    std::string finish_name;
+    std::cout << "Введите название конечной остановки: ";
+    std::cin >> finish_name;
+    
+    Stop* finish = find_stop_by_name(head, finish_name);
+    
     if (finish == nullptr) {
         std::cout << "Остановка \"" << finish_name << "\" не найдена.\n";
         return;
@@ -113,7 +115,7 @@ std::vector<Stop*> StartBracnhes() {
     a1->name = "Киевская";
     Stop* a2 = new Stop;
     a2->cost = 10;
-    a2->name = "Площадь Василевского";
+    a2->name = "Площадь";
     Stop* a3 = new Stop;
     a3->cost = 30;
     a3->name = "Октябрьская";
@@ -159,18 +161,18 @@ std::vector<Stop*> StartBracnhes() {
 
     return branches;
 }
+
 void add_ost_after_another(Stop* head) {
     std::cout << "Введите имя остановки, после которой добавить новую: ";
     std::string foundname;
     std::cin >> foundname;
     Stop* ptr1 = find_stop_by_name(head, foundname);
     Stop* ptrlast = find_prev_stop(head, foundname);
-    if (ptr1->next_stop == nullptr) {
-        std::cout << "Т.к. остановка конечная, цена до следующей будет 0" << std::endl;
+    if ((ptr1->next_stop == nullptr) and (ptrlast != nullptr)) {
         std::cout << "Введите имя новой остановки: ";
         std::string name;
         std::cin >> name;
-        std::cout << "Введите цену от предыдущей остановки до нынешней";
+        std::cout << "Введите цену от предыдущей остановки до нынешней: ";
         int lastcost;
         std::cin >> lastcost;
         ptrlast->cost = lastcost;
@@ -187,12 +189,23 @@ void add_ost_after_another(Stop* head) {
         std::cin >> cost;
         if (ptrlast != nullptr) {
             ptrlast->cost = cost;
+            Stop* newStop = create_new_stop(name, cost);
+            newStop->next_stop = ptr1->next_stop;
+            ptr1->next_stop = newStop;
         }
         else {
             Stop* newStop = create_new_stop(name, cost);
             newStop->next_stop = ptr1->next_stop;
             ptr1->next_stop = newStop;
         }
+    }
+}
+bool check_q(int q, std::vector<Stop*>& branches) {
+    if ((q < 0) or (q > branches.size())) {
+        return 0;
+    }
+    else {
+        return 1;
     }
 }
 
@@ -203,7 +216,8 @@ int main() {
 
     std::vector<Stop*> branches = StartBracnhes();
     int pynkt;
-
+    int q;
+    bool checkedq;
     do {
         std::cout << "\n------Меню------\n" << std::endl;
         std::cout << "Какой пункт выполнить?" << std::endl;
@@ -223,13 +237,25 @@ int main() {
         }
         else if (pynkt == 2) {
             std::cout << "Выберите маршрут: ";
-            int q; std::cin >> q;
-            print_way_from_a_to_b(branches[q-1]);
+            std::cin >> q;
+            checkedq = check_q(q, branches);
+            if (checkedq != 0) {
+                    print_way_from_a_to_b(branches[q - 1]);
+            }
+            else {
+                std::cout << "Маршрут не найден";
+            }
         }
         else if (pynkt == 3) {
             std::cout << "Выберите маршрут: ";
-            int q; std::cin >> q;
-            add_ost_after_another(branches[q-1]);
+            std::cin >> q;
+            checkedq = check_q(q, branches);
+            if (checkedq != 0) {
+                add_ost_after_another(branches[q - 1]);
+            }
+            else {
+                std::cout << "Маршрут не найден";
+            }
         }
         else if (pynkt == 4) {
             std::cout << "Введите имя остановки: ";
