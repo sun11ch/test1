@@ -1,9 +1,10 @@
-﻿#include <iostream>
+﻿
+#include <iostream>
 #include <vector>
 #include <array>
 #include <algorithm>
 #include <cstdlib>
-#include <random>
+#include <ctime>
 
 
 void printVector(const std::vector<int>& v) {
@@ -14,7 +15,12 @@ void printVector(const std::vector<int>& v) {
     }
     std::cout << "]" << std::endl;
 }
-
+void printArray (std::array<int, 10>& arr) {
+    for (int i = 0; i < 10; i++) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+}
 void SearchElements(std::vector<int>& v, int value) {
     bool Founded = false;
     std::cout << "Индексы: [";
@@ -29,7 +35,6 @@ void SearchElements(std::vector<int>& v, int value) {
     }
     std::cout << "]" << std::endl;
 }
-
 void variant3(std::vector<int>& v) {
     std::cout << "До: ";
     printVector(v);
@@ -54,27 +59,22 @@ void variant3(std::vector<int>& v) {
     std::cout << "После: ";
     printVector(v);
 }
-
 void sortByValue(std::array<int, 10> arr) {
     std::sort(arr.begin(), arr.end());
-    std::cout << "sortByValue (копия): ";
-    for (int x : arr) std::cout << x << " ";
-    std::cout << " ";
+    std::cout << "Отсортированный массив: ";
+    printArray(arr);
 }
-
 void sortByReference(std::array<int, 10>& arr) {
     std::sort(arr.begin(), arr.end());
+    std::cout << "Отсортированный массив: ";
+    printArray(arr);
 }
-
 void sortByPointer(std::array<int, 10>* arr) { 
-    std::sort(arr->begin(), arr->end());
+    std::sort((*arr).begin(), (*arr).end());
+    std::reverse((*arr).begin(), (*arr).end());
+    std::cout << "Отсортированный массив ";
+    printArray(*arr);
 }
-
-void printArray(const std::array<int, 10>& arr) {
-    for (int x : arr) std::cout << x << " ";
-    std::cout << "\n";
-}
-
 void runPart1() {
     std::cout << "Введите количество элементов массива: ";
     int n;
@@ -134,28 +134,35 @@ void runPart1() {
     } while (choice != 0);
 }
 void runPart2() {
-    std::cout << "\n===== Пункт 2 (std::array) =====\n";
+    std::cout << "Пункт 2" << std::endl;
 
     std::array<int, 10> arr;
-    for (int& x : arr) x = std::rand() % 21 - 10; // [-10; 10]
-
-    std::cout << "Исходный массив: ";
+    srand(time(NULL));
+    for (int i = 0; i < 10; i++) {
+        arr[i] = rand() % 21-10;
+    }
+    std::cout << "Первоначальный массив: " << std::endl;
     printArray(arr);
 
+    std::cout << "--------------Сортировка по значению--------------" << std::endl;
+    std::cout << "Массив в основной функции до передачи: "; printArray(arr);
     sortByValue(arr);
+    std::cout << "Массив в основной функции после передачи: "; printArray(arr);
 
-    sortByReference(arr);
-    std::cout << "После сортировки по ссылке: ";
-    printArray(arr);
 
-    std::cout << "После перемешивания: ";
-    printArray(arr);
-
+    std::cout << "--------------Сортировка по указателю--------------" << std::endl;
+    std::cout << "Указатель: можно менять, куда он указывает; может быть nullptr; требует разыменования" << std::endl;
+    std::cout << "Массив в основной функции до передачи: "; printArray(arr);
     sortByPointer(&arr);
-    std::cout << "После сортировки по указателю: ";
-    printArray(arr);
+    std::cout << "Массив в основной функции после передачи: "; printArray(arr);
 
-    std::cout << "\n(Пункт 2 выполнен)\n";
+
+    std::cout << "--------------Сортировка по ссылке--------------" << std::endl;
+    std::cout << "Ссылка: всегда указывает на 1 объект; никогда не бывает nullptr; нельзя поменять объект, на который она указывает" << std::endl;
+    std::cout << "Массив в основной функции до передачи: "; printArray(arr);
+    sortByReference(arr);
+    std::cout << "Массив в основной функции после передачи: "; printArray(arr);
+
 }
 void runPart3() {
     std::cout << "vector был выбран, потому что это динамический массив." << std::endl;
