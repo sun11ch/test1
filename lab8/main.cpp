@@ -167,6 +167,10 @@ void add_ost_after_another(Stop* head) {
     std::string foundname;
     std::cin >> foundname;
     Stop* ptr1 = find_stop_by_name(head, foundname);
+    if (ptr1 == nullptr) {
+        std::cout << "Остановка \"" << foundname << "\" не найдена.\n";
+        return;
+    }
     Stop* ptrlast = find_prev_stop(head, foundname);
     if ((ptr1->next_stop == nullptr) and (ptrlast != nullptr)) {
         std::cout << "Введите имя новой остановки: ";
@@ -200,6 +204,7 @@ void add_ost_after_another(Stop* head) {
         }
     }
 }
+
 bool check_q(int q, std::vector<Stop*>& branches) {
     if ((q < 0) or (q > branches.size())) {
         return 0;
@@ -209,6 +214,45 @@ bool check_q(int q, std::vector<Stop*>& branches) {
     }
 }
 
+void memclear(std::vector<Stop*>& branches) {
+    for (int i = 0; i < branches.size(); i++) {
+        Stop* ptr = branches[i];
+        while (ptr != nullptr) {
+            Stop* tmp = ptr->next_stop;
+            ptr->next_stop = ptr->next_stop->next_stop;
+            delete tmp;
+        }
+    }
+}
+
+void check_stop(Stop* head) {
+    std::cout << "Введите имя остановки, информацию о которой хотите получить: ";
+    std::string foundname;
+    std::cin >> foundname;
+    Stop* ptr1 = find_stop_by_name(head, foundname);
+    if (ptr1 == nullptr) {
+        std::cout << "Остановка \"" << foundname << "\" не найдена.\n";
+        return;
+    }
+    Stop* ptrlast = find_prev_stop(head, foundname);
+    if ((ptr1->next_stop == nullptr) and (ptrlast != nullptr)) {
+        std::cout << "Остановка: " << ptr1->name << std::endl;
+        std::cout << "Цена от предыдущей остановки до этой: " << ptrlast->cost << std::endl;
+        std::cout << "Цена до следующей остановки: не существует";
+    }
+    else {
+        if (ptrlast != nullptr) {
+            std::cout << "Остановка: " << ptr1->name << std::endl;
+            std::cout << "Цена от предыдущей остановки: " << ptrlast->cost << std::endl;
+            std::cout << "Цена до следующей остановки: " << ptr1->cost;
+        }
+        else {
+            std::cout << "Остановка: " << ptr1->name << std::endl;
+            std::cout << "Цена от предыдущей: не существует " << std::endl;
+            std::cout << "Цена до следующей остановки: " << ptr1->cost;
+        }
+    }
+}
 int main() {
     SetConsoleCP(1251); //для ввода по русски
     SetConsoleOutputCP(1251); //для вывода по русски
@@ -226,6 +270,7 @@ int main() {
         std::cout << "2: Показать путь из точки А в точку Б" << std::endl;
         std::cout << "3: Добавить остановку после выбранной" << std::endl;
         std::cout << "4: Создать новую остановку на новом маршруте" << std::endl;
+        std::cout << "5: Посмотреть информацию об остановке" << std::endl;
         std::cout << "Ваш выбор: ";
         std::cin >> pynkt;
         if (pynkt == 0) {
@@ -268,8 +313,20 @@ int main() {
             branches.push_back(new_branch);
             std::cout << "Новый маршрут создан";
         }
+        else if (pynkt == 5) {
+            std::cout << "Выберите маршрут: ";
+            std::cin >> q;
+            checkedq = check_q(q, branches);
+            if (checkedq != 0) {
+                check_stop(branches[q-1]);
+            }
+            else {
+                std::cout << "Маршрут не найден";
+            }
+        }
 
     } while (pynkt != 0);
+    memclear(branches);
     return 0;
 }
 
