@@ -3,34 +3,38 @@
 class Player {
 private:
 	std::string name;
+	std::string doing;
+	unsigned hp;
 	float x;
 	float y;
-	unsigned hp;
-	bool doing;
+//protected:
+	//float x;
+	//float y;
+	//unsigned hp
 public:
 	Player() {
 		std::cout << "afk player created" << std::endl;
 		name = "Undefined";
-		x = 0;
-		y = 0;
+		doing = "Nothing";
 		hp = 100;
-		doing = 1;
+		x = 0.0;
+		y = 0.0;
 	}
 	Player(const Player& p) {
 		std::cout << "player copied" << std::endl;
 		name = p.name;
+		doing = p.doing;
+		hp = p.hp;
 		x = p.x;
 		y = p.y;
-		hp = p.hp;
-		doing = p.doing;
 	}
-	Player(std::string name_, float x_, float y_, unsigned hp_, bool doing_) {
+	Player(std::string name_, std::string doing_, unsigned hp_, float x_, float y_) {
 		std::cout << "norm player created" << std::endl;
+		doing = doing_;
 		name = name_;
+		hp = hp_;
 		x = x_;
 		y = y_;
-		hp = hp_;
-		doing = doing_;
 	}
 	~Player(){
 		std::cout << "player cleared" << std::endl;
@@ -41,7 +45,7 @@ public:
 		std::cout << "X coord: " << x << std::endl;
 		std::cout << "Y coord: " << y << std::endl;
 		std::cout << "Hp: " << hp << std::endl;
-		std::cout << "Doing (is alive): " << doing << std::endl;
+		std::cout << "Doing: " << doing << std::endl;
 	}
 
 	std::string getName() const {
@@ -56,7 +60,7 @@ public:
 	unsigned getHp() const {
 		return hp;
 	}
-	bool getDoing() const {
+	std::string getDoing() const {
 		return doing;
 	}
 
@@ -72,23 +76,25 @@ public:
 	}
 
 	void damage(int dmg) {
-		if ((doing == 0) or (dmg <0 )) {
+		if (dmg < 0 ) {
 			return;
 		}
 		if (dmg >= hp) {
 			hp = 0;
-			doing = 0;
 		}
 		else {
 			hp -= dmg;
 		}
 	}
 	void heal(int heal) {
-		if ((doing == 0) or (heal < 0)) {
+		if (heal < 0) {
 			return;
 		}
 		if ( (heal + hp) > 100) {
 			hp = 100;
+		}
+		if (hp == 100) {
+			std::cout << "hp already 100";
 		}
 		else{
 			hp += heal;
@@ -100,7 +106,7 @@ public:
 int main() {
 	Player alex1;
 	Player alex2(alex1);
-	Player alex3("sanya", 0.3, 0.1, 50, 1);
+	Player alex3("df", "nothing", 100, 1,1);
 	alex3.damage(40);
 	alex3.printinfo();
 	alex3.heal(90);
