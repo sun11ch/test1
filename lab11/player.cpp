@@ -40,7 +40,7 @@ void Player::printinfo() const {
                 std::cout << "Item description: " <<inv[i].description << std::endl;
                 std::cout << "Item rare: " << inv[i].rare << std::endl;
 				if (i + 1 < inv.size())
-					std::cout << ", ";
+					std::cout << " ----- " << std::endl;
 			}
 		}
 		std::cout << " ----- " << std::endl;
@@ -176,14 +176,15 @@ void Player::openBox(const lootbox& box){
     std::cout << "Your item from case: " << itemFromBox.name << std::endl;
     std::cout << "Do you want to add this item to inventory? 1 - yes / 2 - no" << std::endl;
     unsigned choose;
-    std::cin >> choose;
-    if (choose == 1){
+    do{
+        std::cin >> choose;
+        if (choose == 1){
             addItem(itemFromBox);
+            break;
         }
-    else if(choose == 2){
-        std::cout << "Item dropped";
-    }
-    else{
-        return;
-    }
+        else if(choose == 2){
+            std::cout << "Item dropped" << std::endl;
+            break;
+        }
+    }while ((choose != 1) or (choose != 2));
 }

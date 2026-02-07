@@ -7,7 +7,7 @@ item::item(const std::string& name_, unsigned rare_, const std::string& descript
 void item::printItem() const{
     std::cout << "Item name: " << name << std::endl;
     std::cout << "Item rare: "<< rare << std::endl;
-    std::cout << "Description" << description << std::endl;
+    std::cout << "Description: " << description << std::endl;
 }
 extern const item bow("Bow", 3, "Just a bow");
 extern const item dolg("Dolg", 1, "Dolg for the most worst students");

@@ -6,25 +6,25 @@ lootbox::lootbox(){
 lootbox::lootbox(const lootbox& other){
     caseName = other.caseName;
     caseItems = other.caseItems;
-    std::cout << "Copy Lootbox this=" << this << " from=" << &other << std::endl;
+    // std::cout << "Copy Lootbox this=" << this << " from=" << &other << std::endl;
 }
 lootbox::lootbox(const std::string& caseName_, const std::vector<item>& caseItems_){
     caseName = caseName_;
     caseItems = caseItems_;
 }
 lootbox::~lootbox(){
-    std::cout << this->caseName << std::endl;
-    std::cout << "lootbox deleted " << this << std::endl;
+    // std::cout << this->caseName << std::endl;
+    std::cout << "lootbox deleted " << std::endl;
 }  
 item lootbox::returnRandItem() const{
     int indx = std::rand()%caseItems.size();
     return caseItems[indx];
 }
 void lootbox::printLootbox() const{
-    std::cout << "Case name: " << caseName;
-    std::cout << "Items in case: ";
+    std::cout << "Case name: " << caseName << std::endl;
+    std::cout << "Items in case: " << std::endl;
     if (caseItems.empty()) {
-        std::cout << "Case is empty";
+        std::cout << "Case is empty" << std::endl;;
     } 
     else {
         for (size_t i = 0; i < caseItems.size(); i++) {
@@ -32,11 +32,8 @@ void lootbox::printLootbox() const{
             std::cout << "Item description: " <<caseItems[i].description << std::endl;
             std::cout << "Item rare: " << caseItems[i].rare << std::endl;
             if (i + 1 < caseItems.size())
-                std::cout << ", ";
+                std::cout << " ----- " << std::endl;
         }
     }
     std::cout << std::endl;
 }
-lootbox test1("TestCase1", {bow, water, grass});
-lootbox test2("TestCase2", {woodSword, diamondSword, dolg, avtomat});
-lootbox test3 = test2;
