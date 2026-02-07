@@ -17,7 +17,10 @@ lootbox::~lootbox(){
     std::cout << "lootbox deleted " << std::endl;
 }  
 item lootbox::returnRandItem() const{
-    int indx = std::rand()%caseItems.size();
+      if (caseItems.empty()) {
+        return item("Nothing", 0, "Case is empty");
+    }
+    int indx = std::rand() % caseItems.size();
     return caseItems[indx];
 }
 void lootbox::printLootbox() const{
