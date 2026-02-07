@@ -1,7 +1,6 @@
 #include "player.hpp"
 #include <iostream>
 #include <cstdlib>
-
 Player::Player() {
 		std::cout << "afk player created" << std::endl;
 		name = "Undefined";
@@ -28,8 +27,7 @@ Player::Player(std::string name_, std::vector<std::string> items_, unsigned hp_,
 	}
 Player::~Player(){
 		std::cout << "player cleared" << std::endl;
-	}
-	
+	}	
 void Player::printinfo() const {
 		std::cout << "Name: " << name << std::endl;
 		std::cout << "X coord: " << x << std::endl;
@@ -48,7 +46,6 @@ void Player::printinfo() const {
 		std::cout << std::endl;
 	
 	}
-
 const std::string& Player::getName() const {
     return name;
 }
@@ -77,7 +74,6 @@ void Player::setPos(float newX, float newY) {
 void Player::addItem(const std::string& newItem) {
     items.push_back(newItem);
 }
-
 void Player::damage(int dmg) {
     if (dmg < 0 ) {
         return;
@@ -107,7 +103,6 @@ void Player::heal(int heal) {
 std::string Player::randomName() {
     return "Player_" + std::to_string(rand() % 100000);
 }
-
 void Player::removeDuplicates(std::vector<std::string>& v) {		
     for (size_t i = 0; i < v.size(); i++) {
         for (size_t j = i + 1; j < v.size(); ) {
@@ -119,7 +114,6 @@ void Player::removeDuplicates(std::vector<std::string>& v) {
         }
     }
 }
-
 Player Player::operator+(const Player& other) const{
     Player res;
     res.name = res.randomName();
@@ -131,14 +125,11 @@ Player Player::operator+(const Player& other) const{
         res.items.push_back(other.items[i]);
     }
     res.removeDuplicates(res.items);
-
     return res;
 }
 Player Player::operator-(const Player& other) const{
     Player res = *this;
-
     res.name = res.randomName();
-
     if (rand() % 2 == 0) {
         res.x = this->x;
         res.y = this->y;
@@ -147,9 +138,6 @@ Player Player::operator-(const Player& other) const{
         res.y = other.y;
     }
     res.hp = this->hp;
-
-
-
     for (size_t i = 0; i < res.items.size(); ) {
         bool inOther = false;
         for (size_t j = 0; j < other.items.size(); j++) {
@@ -158,17 +146,14 @@ Player Player::operator-(const Player& other) const{
                 break;
             }
         }
-
         if (inOther && (rand() % 2 == 0)) { 
             res.items.erase(res.items.begin() + i);
         } else {
             i++;
         }
     }
-
     return res;
     }
-
 Player Player::operator/(const Player& other) const{
     Player res;
     res.name = res.randomName();
@@ -185,6 +170,5 @@ Player Player::operator/(const Player& other) const{
         res.items.push_back(other.items[i]);
     }
     res.removeDuplicates(res.items);
-
     return res;
 }
