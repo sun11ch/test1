@@ -2,6 +2,7 @@
 Player::Player() {
 		std::cout << "afk player created" << std::endl;
 		name = "Undefined";
+        doing = "afk";
 		hp = 100;
 		x = 0.0;
 		y = 0.0;
@@ -9,14 +10,16 @@ Player::Player() {
 Player::Player(const Player& p) {
     std::cout << "player copied" << std::endl;
     name = p.name;
+    doing = p.doing;
     inv = p.inv;
     hp = p.hp;
     x = p.x;
     y = p.y;
 }
-Player::Player(const std::string& name_, const std::vector<item>& inv_, unsigned hp_, float x_, float y_) {
+Player::Player(const std::string& name_, const std::string& doing_, const std::vector<item>& inv_, unsigned hp_, float x_, float y_) {
 		std::cout << "norm player created" << std::endl;
 		name = name_;
+        doing = doing_;
 		inv = inv_;
 		hp = hp_;
 		x = x_;
@@ -27,6 +30,7 @@ Player::~Player(){
 	}	
 void Player::printinfo() const {
 		std::cout << "Name: " << name << std::endl;
+        std::cout << "Doing: " << doing << std::endl;
 		std::cout << "X coord: " << x << std::endl;
 		std::cout << "Y coord: " << y << std::endl;
 		std::cout << "Hp: " << hp << std::endl;
@@ -48,6 +52,9 @@ void Player::printinfo() const {
 const std::string& Player::getName() const {
     return name;
 }
+const std::string& Player::getDoing() const {
+    return doing;
+}
 const std::vector<item>& Player::getItems() const {
     return inv;
 }
@@ -65,6 +72,9 @@ void Player::setX(float newX) {
 }
 void Player::setY(float newY) {
     y = newY;
+}
+void Player::setDoing(std::string newDoing) {
+    doing = newDoing;
 }
 void Player::setPos(float newX, float newY) {
     x = newX;
@@ -116,6 +126,7 @@ void Player::removeDuplicates(std::vector<item>& v) {
 Player Player::operator+(const Player& other) const{
     Player res;
     res.name = res.randomName();
+    res.doing = this->doing;
     res.x = (this->x + other.x) / 2.0f;
     res.y = (this->y + other.y) / 2.0f;
     res.hp = this->hp;
@@ -137,6 +148,7 @@ Player Player::operator-(const Player& other) const{
         res.y = other.y;
     }
     res.hp = this->hp;
+    res.doing = this->doing;
     for (size_t i = 0; i < res.inv.size(); ) {
         bool inOther = false;
         for (size_t j = 0; j < other.inv.size(); j++) {
@@ -159,6 +171,7 @@ Player Player::operator/(const Player& other) const{
     res.x = this->x * other.x;
     res.y = this->y * other.y;
     res.hp = this->hp;
+    res.doing = this->doing;
     res.inv.clear();
     size_t halfThis = this->inv.size() / 2;       
     size_t halfOther = other.inv.size() / 2; 
@@ -186,5 +199,5 @@ void Player::openBox(const lootbox& box){
             std::cout << "Item dropped" << std::endl;
             break;
         }
-    }while ((choose != 1) or (choose != 2));
+    }while ((choose != 1) and (choose != 2));
 }

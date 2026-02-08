@@ -5,7 +5,7 @@ int main() {
 	setlocale(LC_ALL, "Rus");
 	lootbox test1("TestCase1", {bow, water, grass});
 	lootbox test2("TestCase2", {woodSword, diamondSword, dolg, avtomat});
-	Player alex2("df", {bow}, 10, 1, 1);
+	Player alex2("df","afk", {bow}, 10, 1, 1);
 	alex2.openBox(test1);
 	alex2.printinfo();
 	std::cout << "=======" << std::endl;
