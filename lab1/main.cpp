@@ -1,39 +1,117 @@
 ﻿#include <iostream>
-#include <limits>
-using namespace std;
+#include <string>
+class Player {
+private:
+	std::string name;
+	std::string doing;
+	unsigned hp;
+	float x;
+	float y;
+//protected:
+	//float x;
+	//float y;
+	//unsigned hp
+public:
+	Player() {
+		std::cout << "afk player created" << std::endl;
+		name = "Undefined";
+		doing = "Nothing";
+		hp = 100;
+		x = 0.0;
+		y = 0.0;
+	}
+	Player(const Player& p) {
+		std::cout << "player copied" << std::endl;
+		name = p.name;
+		doing = p.doing;
+		hp = p.hp;
+		x = p.x;
+		y = p.y;
+	}
+	Player(std::string name_, std::string doing_, unsigned hp_, float x_, float y_) {
+		std::cout << "norm player created" << std::endl;
+		doing = doing_;
+		name = name_;
+		hp = hp_;
+		x = x_;
+		y = y_;
+	}
+	~Player(){
+		std::cout << "player cleared" << std::endl;
+	}
 
+	void printinfo() const {
+		std::cout << "Name: " << name << std::endl;
+		std::cout << "X coord: " << x << std::endl;
+		std::cout << "Y coord: " << y << std::endl;
+		std::cout << "Hp: " << hp << std::endl;
+		std::cout << "Doing: " << doing << std::endl;
+	}
+
+	std::string getName() const {
+		return name;
+	}
+	float getX() const {
+		return x;
+	}
+	float getY() const {
+		return y;
+	}
+	unsigned getHp() const {
+		return hp;
+	}
+	std::string getDoing() const {
+		return doing;
+	}
+
+	void setX(float newX) {
+		x = newX;
+	}
+	void setY(float newY) {
+		y = newY;
+	}
+	void setPos(float newX, float newY) {
+		x = newX;
+		y = newY;
+	}
+
+	void damage(int dmg) {
+		if (dmg < 0 ) {
+			return;
+		}
+		if (dmg >= hp) {
+			hp = 0;
+		}
+		else {
+			hp -= dmg;
+		}
+	}
+	void heal(int heal) {
+		if (heal < 0) {
+			return;
+		}
+		if ( (heal + hp) > 100) {
+			hp = 100;
+		}
+		if (hp == 100) {
+			std::cout << "hp already 100";
+		}
+		else{
+			hp += heal;
+		}
+		
+	}
+};
 
 int main() {
-	/*
-	добавить многострочный комментарий - есть
-	добавить деление - есть
-	исправить вывод типа данных - есть
-	*/
-	unsigned short a; // минимальный неотрицательный целочисленный тип данных
-	unsigned short b; // минимальный неотрицательный целочисленный тип данных
-	cout << "Number a (0-65535):";
-	cin >> a;
-	cout << "Number b (0-65535):";
-	cin >> b;
-	unsigned int sum_ab = a+b; // т.к. макс. сумма а+б = 131 070 
-	int razn_ab = a-b; // числа принимают значения от -65535 до 65535
-	int razn_ba = b-a;// числа принимают значения от -65535 до 65535
-	unsigned int proizv_ab = a*b; // макс. число здесь 4 294 836 225
-	float delenie_ab = static_cast<float>(a) / b; // чтоб не терять дробную часть
-	float delenie_ba = static_cast<float>(b) / a; // то-же самое
-	cout << "a+b = b+a: " << sum_ab << endl;
-	cout << "a-b: " << razn_ab << endl;
-	cout << "b-a: " << razn_ba << endl;
-	cout << "a*b = b*a: " << proizv_ab << endl;
-	cout << "a/b = " << delenie_ab << endl;
-	cout << "b/a = " << delenie_ba << endl;
-	
-	/// название типа данных, размер в битах, максимальное и минимальное значение посчитанное формулой (можно в экс. формате)
-	cout << "|UNSIGNED SHORT| " << "|size: " << sizeof(short) * 8 << " bits| " << "|max: " << pow(2, sizeof(short) * 8) -1 << "| "<< "|min: " << numeric_limits<unsigned short>::lowest()<< "|" << endl;
+	Player alex1;
+	Player alex2(alex1);
+	Player alex3("df", "nothing", 100, 1,1);
+	alex3.damage(40);
+	alex3.printinfo();
+	alex3.heal(90);
+	alex3.damage(40);
+	alex3.printinfo();
 
-	cout << "|UNSIGNED INT| " << "|size: " << sizeof(int) * 8 << " bits| " << "|max: " << pow(2, sizeof(int)*8) -1<< "| " << "|min: "<< numeric_limits<unsigned int>::min()<< "|" << endl;
-
-	cout << "|INT| " << "|size: " << sizeof(int)*8 << " bits| " << "|max: " << pow(2, sizeof(int) * 8 - 1) - 1<< "| " << "|min: " << -pow(2, sizeof(int) * 8 -1 ) << "|" << endl;
-
-	cout << "|FLOAT| " << "|size: " << sizeof(float) * 8 << " bits|" << "|max: " << FLT_MAX << "| " << "|min: " << numeric_limits<float>::lowest() << "|" << endl;
+	return 0;
 }
