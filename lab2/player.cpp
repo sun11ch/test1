@@ -1,14 +1,12 @@
 #include "player.hpp"
-#include <iostream>
-#include <cstdlib>
 Player::Player() {
-		std::cout << "afk player created" << std::endl;
-		name = "Undefined";
-		items.push_back("");
-		hp = 100;
-		x = 0.0;
-		y = 0.0;
-	}
+    std::cout << "afk player created" << std::endl;
+    name = "Undefined";
+    items.push_back("");
+    hp = 100;
+    x = 0.0;
+    y = 0.0;
+}
 Player::Player(const Player& p) {
     std::cout << "player copied" << std::endl;
     name = p.name;
@@ -18,34 +16,41 @@ Player::Player(const Player& p) {
     y = p.y;
 }
 Player::Player(std::string name_, std::vector<std::string> items_, unsigned hp_, float x_, float y_) {
-		std::cout << "norm player created" << std::endl;
-		name = name_;
-		items = items_;
-		hp = hp_;
-		x = x_;
-		y = y_;
-	}
+    std::cout << "norm player created" << std::endl;
+    name = name_;
+    items = items_;
+    hp = hp_;
+    x = x_;
+    y = y_;
+}
 Player::~Player(){
-		std::cout << "player cleared" << std::endl;
-	}	
+    std::cout << "player " << this->name << " cleared" << std::endl;
+    if (!items.empty()){
+        items.clear();
+        std::cout << "vector cleared" << std::endl;
+    }
+    else{
+        std::cout << "vector was empty" << std::endl;
+    }
+}	
 void Player::printinfo() const {
-		std::cout << "Name: " << name << std::endl;
-		std::cout << "X coord: " << x << std::endl;
-		std::cout << "Y coord: " << y << std::endl;
-		std::cout << "Hp: " << hp << std::endl;
-		std::cout << "items: ";
-		if (items.empty()) {
-			std::cout << "Inventory is empty";
-		} else {
-			for (size_t i = 0; i < items.size(); i++) {
-				std::cout << items[i];
-				if (i + 1 < items.size())
-					std::cout << ", ";
-			}
-		}
-		std::cout << std::endl;
-	
-	}
+    std::cout << "Name: " << name << std::endl;
+    std::cout << "X coord: " << x << std::endl;
+    std::cout << "Y coord: " << y << std::endl;
+    std::cout << "Hp: " << hp << std::endl;
+    std::cout << "items: ";
+    if (items.empty()) {
+        std::cout << "Inventory is empty";
+    } else {
+        for (size_t i = 0; i < items.size(); i++) {
+            std::cout << items[i];
+            if (i + 1 < items.size())
+                std::cout << ", ";
+        }
+    }
+    std::cout << std::endl;
+
+}
 const std::string& Player::getName() const {
     return name;
 }
@@ -108,13 +113,14 @@ void Player::removeDuplicates(std::vector<std::string>& v) {
         for (size_t j = i + 1; j < v.size(); ) {
             if (v[j] == v[i]) {
                 v.erase(v.begin() + j);
-            } else {
+            } 
+            else {
                 j++;
             }
         }
     }
 }
-Player Player::operator+(const Player& other) const{
+Player Player::operator+(const Player& other){
     Player res;
     res.name = res.randomName();
     res.x = (this->x + other.x) / 2.0f;
@@ -127,7 +133,7 @@ Player Player::operator+(const Player& other) const{
     res.removeDuplicates(res.items);
     return res;
 }
-Player Player::operator-(const Player& other) const{
+Player Player::operator-(const Player& other){
     Player res = *this;
     res.name = res.randomName();
     if (rand() % 2 == 0) {
@@ -146,15 +152,16 @@ Player Player::operator-(const Player& other) const{
                 break;
             }
         }
-        if (inOther && (rand() % 2 == 0)) { 
+        if (inOther and (rand() % 2 == 0)) { 
             res.items.erase(res.items.begin() + i);
-        } else {
+        } 
+        else {
             i++;
         }
     }
     return res;
-    }
-Player Player::operator/(const Player& other) const{
+}
+Player Player::operator/(const Player& other){
     Player res;
     res.name = res.randomName();
     res.x = this->x * other.x;
@@ -171,4 +178,15 @@ Player Player::operator/(const Player& other) const{
     }
     res.removeDuplicates(res.items);
     return res;
+}
+Player& Player::operator=(const Player& other){
+    if (this == &other) {
+        return *this;
+    }
+    name = other.name;
+    items = other.items; 
+    hp = other.hp;
+    x = other.x;
+    y = other.y;
+    return *this;
 }

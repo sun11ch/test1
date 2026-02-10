@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <vector>
+#include <iostream>
+#include <cstdlib>
 class Player {
 private:
 	std::string name;
@@ -27,7 +29,8 @@ public:
 	void heal(int heal);
 	std::string randomName();
 	void removeDuplicates(std::vector<std::string>& v);
-	Player operator+(const Player& other) const;
-	Player operator-(const Player& other) const;
-	Player operator/(const Player& other) const;
+	Player operator+(const Player& other);
+	Player operator-(const Player& other);
+	Player operator/(const Player& other);
+	Player& operator=(const Player& other);
 };

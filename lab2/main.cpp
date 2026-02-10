@@ -3,11 +3,17 @@
 
 int main() {
 	std::srand((unsigned)std::time(nullptr));
-	Player alex1("alex1", {"apple", "bow", "guard", "potion", "testitem"}, 24, 13.4, 11.7);
-	Player alex2("alex2", {"sword", "bow", "potion", "grysha"}, 37, 9.2, 9.82);
-	Player alex3 = alex1+alex2+alex2;
+	Player alex1("alex1", {"apple", "bow", "guard", "potion", "testitem"}, 50, 5, 5);
+	Player alex2("alex2", {"sword", "bow", "potion", "grysha"}, 30, 10, 10);
+	// Player alex22("alex22", {}, 100, 22, 22);
+	// alex2 = alex22;
+	// std::cout << "alex2:  " << &alex2.getItems() << std::endl;
+	// std::cout << "alex22: " << &alex22.getItems() << std::endl;
+	Player alex3 = alex1+alex2;
 	Player alex4 = alex1-alex2;
 	Player alex5 = alex1/alex2;
-	alex5.printinfo();
+	// alex3.printinfo();
+	alex4.printinfo();
+	// alex5.printinfo();
 	return 0;
 }
