@@ -176,10 +176,10 @@ Player Player::operator/(const Player& other){
     for (size_t i = halfOther; i < other.items.size(); i++) {
         res.items.push_back(other.items[i]);
     }
-    res.removeDuplicates(res.items);
+    //res.removeDuplicates(res.items);
     return res;
 }
-Player& Player::operator=(const Player& other){
+Player& Player::operator=(const Player& other){     
     if (this == &other) {
         return *this;
     }

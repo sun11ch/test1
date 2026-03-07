@@ -3,8 +3,8 @@
 
 int main() {
 	std::srand((unsigned)std::time(nullptr));
-	Player alex1("alex1", {"apple", "bow", "guard", "potion", "testitem"}, 50, 5, 5);
-	Player alex2("alex2", {"sword", "bow", "potion", "grysha"}, 30, 10, 10);
+	Player alex1("alex1", {"sword", "bow"}, 50, 5, 5);
+	Player alex2("alex2", {"sword", "bow"}, 30, 10, 10);
 	// Player alex22("alex22", {}, 100, 22, 22);
 	// alex2 = alex22;
 	// std::cout << "alex2:  " << &alex2.getItems() << std::endl;
