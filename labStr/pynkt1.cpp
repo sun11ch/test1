@@ -1,5 +1,4 @@
 #include "pynkt1.hpp"
-#include "includes.hpp"
 char toLowerC(char c){
     if (c >= 'À' && c <= 'ß') return c+32;
     if (c == '¨') return c+16;

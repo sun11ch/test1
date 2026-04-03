@@ -1,7 +1,7 @@
 #include "letters.hpp"
-#include "includes.hpp"
 void printLetters(){
     for (int code = 32; code < 123; code++){
+        if (code == 32) std::cout << char(0) << " - " << "0" << std::endl;
         if (code == 44) std::cout << char(code) << " - " << code << std::endl;
         if (code == 46) std::cout << char(code) << " - " << code << std::endl;
         if (code == 47) std::cout << char(code) << " - " << code << std::endl;

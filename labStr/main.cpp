@@ -1,5 +1,6 @@
-#include "letters.cpp"
-#include "pynkt1.cpp"
+#include "letters.hpp"
+#include "pynkt1.hpp"
+
 std::string doNormWord(std::string& w){
     for (int i = 0; i < w.size(); i++) {
     if (w[i] == '¸') w[i] = 'å';
@@ -7,6 +8,7 @@ std::string doNormWord(std::string& w){
     }
     return w;
 }
+
 std::string toLowerWord(std::string& w){
     char temp;
     for (int i = 0; i<w.size(); i++){
@@ -17,6 +19,7 @@ std::string toLowerWord(std::string& w){
     }
     return w;
 }
+
 bool isCorrectWordForPynkt2(const std::string& word) {
     for (int i = 1; i < word.size(); i++) {
         if (word[i] < word[i - 1]) {
@@ -34,9 +37,11 @@ void removeDuplicates(std::vector<std::string>& vec) {
     std::sort(vec.begin(), vec.end());
     vec.erase(std::unique(vec.begin(), vec.end()), vec.end());
 }
+
 void printV(std::vector<std::string>& result){
         for (int i = 0; i<result.size(); i++) std::cout << result[i] << std::endl;
 }
+
 int main(){
     std::setlocale(LC_ALL, "Russian");
     SetConsoleCP(1251);
@@ -68,7 +73,7 @@ int main(){
     }
     if (!temp.empty()) allWords.push_back(temp);
     std::sort(allWords.begin(), allWords.end(), condition);
-
+    
     std::vector<std::string> result;
     std::vector<std::string> resultNorm;
 
@@ -80,13 +85,13 @@ int main(){
         if (!isCorrectWordForPynkt2(normalized)) {
             continue;
         }
-
+        
         bool exists = false;
         for (int j = 0; j < resultNorm.size(); j++) {
             if (resultNorm[j] == normalized) {
                 exists = true;
                 break;
-            }
+            }   
         }
 
         if (!exists) {
